@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :google, :linkedin]
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :linkedin]
  
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)
@@ -20,11 +20,20 @@ class User < ActiveRecord::Base
           user = User.new(
             email: email ? email : "#{auth.uid}@change-me.com",
             password: password,
-            password_confirmation: password
+            password_confirmation: password,
+            name: "#{auth.info.name}",
           )
-        elsif auth.provider == 'twitter'
+        elsif auth.provider == 'google_oauth2'
           user = User.new(
             email: "#{auth.uid}@change-me.com",
+            password: password,
+            password_confirmation: password,
+            name: "#{auth.info.name}",
+          )
+        elsif auth.provider == 'linkedin'
+          user = User.new(
+            email: "#{auth.uid}@change-me.com",
+            name: "#{auth.info.name}",
             password: password,
             password_confirmation: password
           )
@@ -51,6 +60,21 @@ class User < ActiveRecord::Base
     else
       return false
     end
-  end      
+  end   
+
+  def self.create_with_omniauth(info)
+    create(name: info['name'])
+  end
+
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+  end 
 
 end
