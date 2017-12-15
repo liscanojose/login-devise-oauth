@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LoginOauth</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!--css-->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/docs.css" rel="stylesheet" >
+  <link href="bootstrap-social.css" rel="stylesheet" >
+</head>
+<body>
+
+	<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+<%= yield %>
+<!-- Some JavaScript that is used only in this demo, not needed for the buttons -->
+  <script src="js/jquery.js"></script>
+  <script src="js/docs.js"></script>
+</body>
+</html>

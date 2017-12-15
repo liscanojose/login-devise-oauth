@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql 
+  username: postgres
+  password: postgres
+  host: localhost
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: login_oatuh_dev
+
+test:
+  <<: *default
+  database: login_oatuh_test
+
+production:
+  <<: *default
+  database: login_oatuh_production
