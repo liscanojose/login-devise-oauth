@@ -5,11 +5,14 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--css-->
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
   <link href="css/docs.css" rel="stylesheet" >
   <link href="bootstrap-social.css" rel="stylesheet" >
+  
+    
 </head>
 <body>
 
@@ -17,8 +20,5 @@
     <p class="alert"><%= alert %></p>
 
 <%= yield %>
-<!-- Some JavaScript that is used only in this demo, not needed for the buttons -->
-  <script src="js/jquery.js"></script>
-  <script src="js/docs.js"></script>
-</body>
+
 </html>

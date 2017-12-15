@@ -18,6 +18,10 @@ gem "devise"
 #OAuth
 gem "omniauth"
 gem "omniauth-facebook"
+gem 'omniauth-google-oauth2'
+gem 'omniauth-linkedin'
+#gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-oauth2', '1.3.1'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
